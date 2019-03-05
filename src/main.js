@@ -1,9 +1,12 @@
 require('../node_modules/@salesforce-ux/design-system/assets/styles/salesforce-lightning-design-system.css');
 
-var SDK = require('blocksdk');
-var sdk = new SDK();
 
-sdk.getContent(function (content) {
+var BlockSDK = require('blocksdk');
+if (window.self === window.top) {
+	document.body.innerText = 'This application is for use in the Salesforce Marketing Cloud Content Builder Editor only.';
+} else {
+	var sdk = new BlockSDK();
+	sdk.getContent(function (content) {
 		var quill = new Quill('#editor-container', {
 			theme: 'snow'
 		});
@@ -22,4 +25,4 @@ sdk.getContent(function (content) {
 		}
 		quill.on('text-change', saveText);
 	});
-
+}
