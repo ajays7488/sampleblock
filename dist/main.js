@@ -82,6 +82,8 @@ fetch('/appID').then(function (res) {
 if (window.self === window.top) {
 	document.body.innerText = 'This application is for use in the Salesforce Marketing Cloud Content Builder Editor only.';
 } else {
+	var content = document.getElementById("editor-container").innerHTML; 
+	sdk.setContent(content);
 	alert("Hello");
 	sdk.getContent(function (content) {
 		var quill = new Quill('#editor-container', {
