@@ -82,8 +82,16 @@ fetch('/appID').then(function (res) {
 if (window.self === window.top) {
 	document.body.innerText = 'This application is for use in the Salesforce Marketing Cloud Content Builder Editor only.';
 } else {
+	if(a==5)
+	{
+	}
+	else
+	{
 	var content = document.getElementById("editor-container").innerHTML; 
 	sdk.setContent(content);
+	}
+	
+	
 	alert("Hello");
 	sdk.getContent(function (content) {
 		var quill = new Quill('#editor-container', {
@@ -91,10 +99,9 @@ if (window.self === window.top) {
 		});
 		quill.root.innerHTML = content;
 		function saveText() {
-			var html = quill.root.innerHTML;
-			sdk.setContent(html);
-			sdk.setSuperContent('This is super content: ' + html);
-
+			var content = quill.root.innerHTML;
+			sdk.setContent(content);
+			a=5;
 			sdk.getData(function (data) {
 				var numberOfEdits = data.numberOfEdits || 0;
 				sdk.setData({
