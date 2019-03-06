@@ -78,12 +78,16 @@ fetch('/appID').then(function (res) {
 	sdk.triggerAuth(appID);
 });
 	
-	
+
 if (window.self === window.top) {
 	document.body.innerText = 'This application is for use in the Salesforce Marketing Cloud Content Builder Editor only.';
 } else {
 	
-	sdk.setContent(quill.root.innerHTML);
+	sdk.getContent(function (content) {
+		var quill = new Quill('#editor-container', {
+			theme: 'snow'
+		});
+		quill.root.innerHTML = content;
 		function saveText() {
 			var html = quill.root.innerHTML;
 			sdk.setContent(html);
@@ -99,7 +103,6 @@ if (window.self === window.top) {
 		quill.on('text-change', saveText);
 	});
 }
-
 
 
 
